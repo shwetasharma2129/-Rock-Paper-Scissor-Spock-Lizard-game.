@@ -1,0 +1,66 @@
+import random
+
+print('''Winning rules of the game ROCK PAPER SCISSORS LIZARD SPOCK are:
+Rock vs Paper -> Paper wins
+Rock vs Scissors -> Rock wins
+Rock vs Lizard -> Rock wins
+Lizard vs Spock -> Lizard wins
+Spock vs Scissors -> Spock wins
+Scissors vs Lizard -> Scissors wins
+Lizard vs Paper -> Lizard wins
+Paper vs Spock -> Paper wins
+Spock vs Rock -> Spock wins
+''')
+
+choices = ['Rock', 'Paper', 'Scissors', 'Spock', 'Lizard']
+
+
+winning_combos = {
+    ('Rock', 'Scissors'): 'Rock',
+    ('Rock', 'Lizard'): 'Rock',
+    ('Paper', 'Rock'): 'Paper',
+    ('Paper', 'Spock'): 'Paper',
+    ('Scissors', 'Paper'): 'Scissors',
+    ('Scissors', 'Lizard'): 'Scissors',
+    ('Lizard', 'Spock'): 'Lizard',
+    ('Lizard', 'Paper'): 'Lizard',
+    ('Spock', 'Rock'): 'Spock',
+    ('Spock', 'Scissors'): 'Spock',
+}
+
+while True:
+    print("\nEnter your choice:")
+    for i, choice in enumerate(choices, 1):
+        print(f"{i} - {choice}")
+
+   
+    user_choice = int(input("Enter your choice (1-5): "))
+    while user_choice < 1 or user_choice > 5:
+        user_choice = int(input("Invalid choice! Please enter a number between 1 and 5: "))
+
+    user_choice_name = choices[user_choice - 1]
+    print(f"User choice is: {user_choice_name}")
+
+    
+    comp_choice = random.randint(1, 5)
+    comp_choice_name = choices[comp_choice - 1]
+    print(f"Computer choice is: {comp_choice_name}")
+
+    print(f"{user_choice_name} vs {comp_choice_name}")
+
+
+    if user_choice_name == comp_choice_name:
+        print("<== It's a tie! ==>")
+    elif (user_choice_name, comp_choice_name) in winning_combos:
+        print(f"<== {user_choice_name} wins! ==>")
+        print("<== User wins! ==>")
+    else:
+        print(f"<== {comp_choice_name} wins! ==>")
+        print("<== Computer wins! ==>")
+
+   
+    ans = input("Do you want to play again? (Y/N): ").strip().lower()
+    if ans == 'n':
+        break
+
+print("Thanks for playing!")
